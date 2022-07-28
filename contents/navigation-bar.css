@@ -1,0 +1,47 @@
+#plasmo-shadow-container {
+    position: relative !important;
+}
+
+#plasmo-mount-container {
+    display: block !important;
+}
+
+.navigation-bar {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    position: relative;
+}
+
+.button {
+    background-color: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 10px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+}
+
+.button a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 40px;
+}
+
+.github {
+    background-color: #505050;
+    color: #fff;
+}
+
+.circleci {
+    background-color: darkgreen;
+    color: #fff;
+}

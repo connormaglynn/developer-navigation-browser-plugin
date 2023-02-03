@@ -1,0 +1,20 @@
+name: 'Build and Zip'
+description: 'Build and Zip  Extension'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Cache pnpm modules
+      uses: actions/cache@v3
+      with:
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-
+    - uses: pnpm/action-setup@v2.2.1
+      with:
+        version: 7.1.0
+        run_install: true
+    - name: Build and zip extension artifact
+      run: pnpm build -- --zip
+      shell: sh

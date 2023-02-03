@@ -1,7 +1,7 @@
 {
   "name": "developer-navigation-browser-plugin",
   "displayName": "Developer Navigation",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A browser exstention to aid developers navigate between different web tools",
   "author": "connor.glynn",
   "scripts": {

@@ -33,8 +33,20 @@ class UrlParser {
     return this
   }
 
-  public isParseable(): boolean {
-    return !!(this.organization && this.project)
+  public isParseable(_url: string): boolean {
+    const url = new URL(_url)
+    let organization
+    let project
+
+    if (url.hostname === "github.com") {
+      organization = url.pathname.split("/")[1]
+      project = url.pathname.split("/")[2]
+    } else if (url.hostname === "app.circleci.com") {
+      organization = url.pathname.split("/")[3]
+      project = url.pathname.split("/")[4]
+    }
+
+    return !!(organization && project)
   }
 
   public getGitHubProjectHome(): string {
@@ -55,29 +67,31 @@ const Button = (props) => {
 }
 
 const NavigationBar = () => {
-  let currentUrl = location.href
-  const urlParser = new UrlParser().setUrl(currentUrl)
+  const [currentUrl, setCurrentUrl] = useState(location.href)
 
-  const [githubUrl, setGithubUrl] = useState(urlParser.getGitHubProjectHome())
-  const [circleCiUrl, setCircleCiUrl] = useState(
-    urlParser.getCircleCiProjectHome()
-  )
+  const urlParser = new UrlParser().setUrl(currentUrl)
+  const githubUrl = urlParser.getGitHubProjectHome()
+  const circleCiUrl = urlParser.getCircleCiProjectHome()
 
   setInterval(() => {
-    if (location.href !== currentUrl) {
-      currentUrl = location.href
-      urlParser.setUrl(currentUrl)
-      setGithubUrl(urlParser.getGitHubProjectHome())
-      setCircleCiUrl(urlParser.getCircleCiProjectHome())
+    const newUrl = location.href
+    if (newUrl !== currentUrl && urlParser.isParseable(newUrl)) {
+      setCurrentUrl(newUrl)
     }
   }, 500)
 
-  return (
-    <div className="navigation-bar">
-      <Button name="Github" href={githubUrl} className="github button" />
-      <Button name="CircleCI" href={circleCiUrl} className="circleci button" />
-    </div>
-  )
+  if (urlParser.isParseable(currentUrl)) {
+    return (
+      <div className="navigation-bar">
+        <Button name="Github" href={githubUrl} className="github button" />
+        <Button
+          name="CircleCI"
+          href={circleCiUrl}
+          className="circleci button"
+        />
+      </div>
+    )
+  }
 }
 
 export default NavigationBar

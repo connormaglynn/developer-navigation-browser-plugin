@@ -1,7 +1,7 @@
 {
   "name": "developer-navigation-browser-plugin",
   "displayName": "Developer Navigation",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A browser exstention to aid developers navigate between different web tools",
   "author": "connor.glynn",
   "scripts": {
@@ -10,18 +10,18 @@
     "build:production": "npm run build && zip -r build/prod.zip build/chrome-mv3-prod"
   },
   "dependencies": {
-    "plasmo": "0.55.0",
+    "plasmo": "0.76.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@plasmohq/prettier-plugin-sort-imports": "3.5.2",
-    "@types/chrome": "0.0.197",
-    "@types/node": "18.7.23",
-    "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
-    "prettier": "2.7.1",
-    "typescript": "4.8.4"
+    "@plasmohq/prettier-plugin-sort-imports": "3.6.4",
+    "@types/chrome": "0.0.237",
+    "@types/node": "20.3.1",
+    "@types/react": "18.2.13",
+    "@types/react-dom": "18.2.6",
+    "prettier": "2.8.8",
+    "typescript": "5.1.3"
   },
   "manifest": {
     "host_permissions": []

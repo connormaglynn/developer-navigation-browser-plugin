@@ -1,9 +1,12 @@
 import cssText from "data-text:~/contents/navigation-bar.css"
-import type { PlasmoContentScript } from "plasmo"
+import type { PlasmoCSConfig } from "plasmo"
 import { useState } from "react"
 
-export const config: PlasmoContentScript = {
-  matches: ["https://github.com/*", "https://app.circleci.com/pipelines/github/*"],
+export const config: PlasmoCSConfig = {
+  matches: [
+    "https://github.com/*",
+    "https://app.circleci.com/pipelines/github/*"
+  ],
   css: ["font.css"]
 }
 
@@ -21,13 +24,13 @@ class UrlParser {
   public setUrl(url: string): UrlParser {
     this.url = new URL(url)
     if (this.url.hostname === "github.com") {
-      this.organization = this.url.pathname.split('/')[1]
-      this.project = this.url.pathname.split('/')[2]
+      this.organization = this.url.pathname.split("/")[1]
+      this.project = this.url.pathname.split("/")[2]
     } else if (this.url.hostname === "app.circleci.com") {
-      this.organization = this.url.pathname.split('/')[3]
-      this.project = this.url.pathname.split('/')[4]
+      this.organization = this.url.pathname.split("/")[3]
+      this.project = this.url.pathname.split("/")[4]
     }
-    return this;
+    return this
   }
 
   public isParseable(): boolean {
@@ -45,7 +48,9 @@ class UrlParser {
 
 const Button = (props) => {
   return (
-    <a href={props.href} className={props.className}>{props.name}</a>
+    <a href={props.href} className={props.className}>
+      {props.name}
+    </a>
   )
 }
 
@@ -53,21 +58,22 @@ const NavigationBar = () => {
   let currentUrl = location.href
   const urlParser = new UrlParser().setUrl(currentUrl)
 
-  const [githubUrl, setGithubUrl] = useState(urlParser.getGitHubProjectHome());
-  const [circleCiUrl, setCircleCiUrl] = useState(urlParser.getCircleCiProjectHome());
+  const [githubUrl, setGithubUrl] = useState(urlParser.getGitHubProjectHome())
+  const [circleCiUrl, setCircleCiUrl] = useState(
+    urlParser.getCircleCiProjectHome()
+  )
 
   setInterval(() => {
     if (location.href !== currentUrl) {
-      currentUrl = location.href;
+      currentUrl = location.href
       urlParser.setUrl(currentUrl)
       setGithubUrl(urlParser.getGitHubProjectHome())
       setCircleCiUrl(urlParser.getCircleCiProjectHome())
     }
-  }, 500);
-
+  }, 500)
 
   return (
-    <div className="navigation-bar" style={{}}>
+    <div className="navigation-bar">
       <Button name="Github" href={githubUrl} className="github button" />
       <Button name="CircleCI" href={circleCiUrl} className="circleci button" />
     </div>

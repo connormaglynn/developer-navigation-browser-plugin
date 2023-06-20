@@ -8,6 +8,8 @@ runs:
       with:
         node-version: 18
         cache: 'npm'
+    - run: npm ci
+      shell: sh
     - name: Build and zip extension artifact
       run: npm run build -- --zip
       shell: sh

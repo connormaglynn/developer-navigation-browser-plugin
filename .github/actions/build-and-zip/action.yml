@@ -4,17 +4,12 @@ description: 'Build and Zip  Extension'
 runs:
   using: 'composite'
   steps:
-    - name: Cache pnpm modules
-      uses: actions/cache@v3
+    - uses: actions/setup-node@v3
       with:
-        path: ~/.pnpm-store
-        key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-
-    - uses: pnpm/action-setup@v2.2.1
-      with:
-        version: 7.1.0
-        run_install: true
+        node-version: 18
+        cache: 'npm'
+    - run: npm ci
+      shell: sh
     - name: Build and zip extension artifact
-      run: pnpm build -- --zip
+      run: npm run build -- --zip
       shell: sh

@@ -1,9 +1,6 @@
-#plasmo-shadow-container {
+.plasmo-csui-container {
+    width: 100%;
     position: relative !important;
-}
-
-#plasmo-mount-container {
-    display: block !important;
 }
 
 .navigation-bar {
@@ -13,6 +10,8 @@
     display: flex;
     justify-content: center;
     border-bottom: 2px solid #316dca;
+    width: 100%;
+    position: relative;
 }
 
 .button {
@@ -21,7 +20,6 @@
     padding: 0 10px;
     text-align: center;
     text-decoration: none;
-    vertical-align: top;
     width: 100%;
 }
 

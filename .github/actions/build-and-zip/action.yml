@@ -7,6 +7,7 @@ runs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
+        cache: 'npm'
     - name: Build and zip extension artifact
-      run: npm build -- --zip
+      run: npm run build -- --zip
       shell: sh
